@@ -23,7 +23,7 @@ printf "[EXT]\nsubjectAltName=DNS:$SERVERNAME\nextendedKeyUsage=serverAuth" > .e
 cat /etc/ssl/openssl.cnf .ext-data > .ext-full
 
 openssl req -new -sha256 -key server.key -subj "/CN=$SERVERNAME" -reqexts EXT -config .ext-full -out server.csr
-openssl x509 -signkey server.key -in server.csr -req -days 825 -out server.cert -extensions EXT -extfile .ext-data
+openssl x509 -signkey server.key -in server.csr -req -days 825 -out server.cert -extensions EXT -extfile .ext-data -sha256
 openssl x509 -text -in server.cert -noout
 
 rm -f server.csr .ext-data .ext-full
